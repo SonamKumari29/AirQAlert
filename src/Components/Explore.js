@@ -2,7 +2,8 @@ import React from 'react'
 import './Explore.css';
 import map from './Images/mapquality.png'
 import Health from './HealthForm';
-
+import Result from './Result';
+import './Result.css';
 function Explore() {
   return (
     <>
@@ -27,6 +28,7 @@ function Explore() {
      
     </div>,
     <Health/>,
+    <Result/>
     <div className='map'>
     <img src={map} alt="Card" className="card-image" />
 
