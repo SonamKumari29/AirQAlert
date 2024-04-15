@@ -38,7 +38,7 @@
     background-color: #0056b3;
   }
   .title{
-    display:flex;
+    
     justify-content: center;
     align-items: center;
   }
@@ -48,6 +48,7 @@
     align-items: center;
     width: 100%;
     height: 70vh;
+    background: linear-gradient(135deg, #c7eeee, #bdd9f3, #74b8f7);
 
 }
   
