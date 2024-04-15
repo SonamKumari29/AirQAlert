@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Result.css';
+import level from './Images/airlevel.png'
 
 function Result() {
   const [aqi, setAqi] = useState('');
@@ -40,6 +41,9 @@ function Result() {
       </div>
       <div className="message">
         {message && <div>{message}</div>}
+      </div>
+      <div className='image-level'>
+        <img className="image-level" src={level} alt=""/>
       </div>
     </div>
   );

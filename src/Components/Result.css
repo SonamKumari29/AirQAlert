@@ -4,6 +4,7 @@
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    background: linear-gradient(135deg, #d1e6ec, #59b9a5, #67e6d0); 
   }
   
   .result-container h2 {
@@ -34,6 +35,13 @@
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+  }
+  .level-image{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width:100%;
+
   }
   
 
