@@ -1,0 +1,32 @@
+.fullscreen-image-container {
+  width: 100vw;
+  height: 100vh;
+   /* Enable scrolling if image doesn't fit */
+   overflow:auto;
+   /* position: fixed; */
+}
+
+.fullscreen-image {
+  /* position: relative;  */
+  width: 100%;
+  opacity: 0.9;
+  
+}
+.space{
+  padding-top: 2rem;
+}
+
+.fullscreen-image img {
+  width: 100%;
+  height: 60vh;
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+.block{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  
+}

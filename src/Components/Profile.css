@@ -1,0 +1,31 @@
+.profile {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .profile-details {
+    background-color: #f57676;
+    border-radius: 8px;
+    padding: 20px;
+  }
+  
+  .buttons {
+    margin-top: 20px;
+  }
+  
+  .logout-button, .new-id-button, .login-button {
+    background-color: #460211;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  .logout-button:hover, .new-id-button:hover, .login-button:hover {
+    background-color: #af233a;
+  }
+  
