@@ -7,7 +7,7 @@ function Explore() {
   return (
     <>
     
-    <div className='explore'>
+    <div className='explore1'>
       <h1>Let's Explore</h1>
     </div>
     <div className="explore">

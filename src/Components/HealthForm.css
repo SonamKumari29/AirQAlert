@@ -4,6 +4,7 @@
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    font-size: 3rem;
   }
   
   .form-container h2 {
@@ -12,7 +13,9 @@
   
   .form-container form {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    font-size: 5rem;
+
   }
   
   .form-container label {
@@ -48,7 +51,13 @@
     align-items: center;
     width: 100%;
     height: 70vh;
-    background: linear-gradient(135deg, #c7eeee, #bdd9f3, #74b8f7);
+    background: linear-gradient(135deg, #c7eeee, #a2e6e0,#c7d0ec,#9ab3e0, #6ec6cc);
 
+    margin-top:-1.5rem;
+}
+.but{
+    margin: 2rem;
+    width:80%;
+    height: 2em;
 }
   

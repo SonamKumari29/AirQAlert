@@ -9,6 +9,7 @@ function HealthForm() {
     bronchitis: false,
     pulmonaryHypertension: false
   });
+  const [selectedCountry, setSelectedCountry] = useState('');
 
   const handleAgeChange = (e) => {
     setAge(e.target.value);
@@ -22,22 +23,24 @@ function HealthForm() {
     }));
   };
 
+  const handleCountryChange = (e) => {
+    setSelectedCountry(e.target.value);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // Do something with the form data, like submitting it to a server
-    console.log('Submitted Data:', { age, diseases });
+    console.log('Submitted Data:', { age, diseases, selectedCountry });
   };
 
   return (
     <div className='form1'>
-        <div className='title'>
+      <div className='title'>
         <h2>Health Form</h2>
-
-        </div>
-      
+      </div>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="age">Age:</label>
+          <label htmlFor="age" style={{ fontSize: '1.2em' }}>Age:</label>
           <input
             type="number"
             id="age"
@@ -48,51 +51,40 @@ function HealthForm() {
         </div>
         <div>
           <p>Select Diseases:</p>
-          <label htmlFor="sinus">
-            <input
-              type="checkbox"
-              id="sinus"
-              name="sinus"
-              checked={diseases.sinus}
-              onChange={handleDiseaseChange}
-            />
-            Sinus
-          </label>
-          <br />
-          <label htmlFor="asthma">
-            <input
-              type="checkbox"
-              id="asthma"
-              name="asthma"
-              checked={diseases.asthma}
-              onChange={handleDiseaseChange}
-            />
-            Asthma
-          </label>
-          <br />
-          <label htmlFor="bronchitis">
-            <input
-              type="checkbox"
-              id="bronchitis"
-              name="bronchitis"
-              checked={diseases.bronchitis}
-              onChange={handleDiseaseChange}
-            />
-            Bronchitis
-          </label>
-          <br />
-          <label htmlFor="pulmonaryHypertension">
-            <input
-              type="checkbox"
-              id="pulmonaryHypertension"
-              name="pulmonaryHypertension"
-              checked={diseases.pulmonaryHypertension}
-              onChange={handleDiseaseChange}
-            />
-            Pulmonary Hypertension
-          </label>
+          {Object.entries(diseases).map(([key, value]) => (
+            <label key={key} htmlFor={key}>
+              <input
+                type="checkbox"
+                id={key}
+                name={key}
+                checked={value}
+                onChange={handleDiseaseChange}
+              />
+              {key.charAt(0).toUpperCase() + key.slice(1)}
+            </label>
+          ))}
         </div>
-        <button type="submit">Submit</button>
+        <div>
+          <label htmlFor="country" style={{ fontSize: '1.2em' }}>Select Country:</label>
+          <select
+            id="country"
+            value={selectedCountry}
+            onChange={handleCountryChange}
+            style={{ fontSize: '1.2em' }}
+          >
+            <option value="">Select a country</option>
+            <option value="USA">USA</option>
+            <option value="UK">UK</option>
+            <option value="UK">India</option>
+            <option value="UK">Indonesia</option>
+            <option value="UK">Fizzi</option>
+            <option value="UK">Pakistan</option>
+            <option value="UK">Ukrain</option>
+            <option value="UK">Zimbave</option>
+            {/* Add more options for other countries */}
+          </select>
+        </div>
+        <button type="submit" className='but'>Submit</button>
       </form>
     </div>
   );

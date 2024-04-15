@@ -4,7 +4,16 @@
     display:flex;
     justify-content: center;
     align-items: center;
+    background: linear-gradient(135deg, #c7eeee, #a2e6e0,#c7d0ec,#9ab3e0, #6ec6cc);
   }
+  .explore1 {
+    padding: 20px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(179, 241, 215);
+  }
+  
   
   .card-container {
     display: flex;
