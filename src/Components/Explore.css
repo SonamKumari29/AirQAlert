@@ -75,3 +75,21 @@
     width:100%
 
   }
+  .but-place{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+    flex-direction: column;
+
+  }
+  .but2{
+    width: 15%;
+    height: 3rem;
+    background-color: darkcyan;
+    margin: 2rem;
+
+  }
+  .but2:hover {
+    background-color: #008b8b; /* Darker shade of cyan when hovered */
+  }
