@@ -1,12 +1,15 @@
 .profile {
-    max-width: 600px;
+    max-width: 70%;
     margin: 0 auto;
     padding: 20px;
     text-align: center;
+    /* display:flex;
+    align-items: center;
+    justify-content: center; */
   }
   
   .profile-details {
-    background-color: #f57676;
+    background-color:#5593af;
     border-radius: 8px;
     padding: 20px;
   }
@@ -16,16 +19,35 @@
   }
   
   .logout-button, .new-id-button, .login-button {
-    background-color: #460211;
+    background-color:#5593af;
     color: white;
     border: none;
     border-radius: 4px;
     padding: 8px 16px;
     cursor: pointer;
     margin-right: 10px;
+    height: 4rem;
+    width: 12rem;
+    border-color: black;
+    font-size: 1.5rem;
   }
   
   .logout-button:hover, .new-id-button:hover, .login-button:hover {
-    background-color: #af233a;
+    background-color: #5593af;
   }
+  .welcome{
+    font-size: 3rem;
+
+  }
+  .email{
+    font-size: 2rem;
+
+  }
+  .points{
+    font-size: 5.5rem;
+
+  }
+.profile-pic{
+  border-radius: 50%;
+}
   
