@@ -258,13 +258,11 @@ export default function InsightsPage() {
                   <CardContent>
                     <div className="h-64 w-full">
                       <ResponsiveContainer width="100%" height="100%">
-                        <RechartsPieChart>
+                        <RechartsPieChart data={pollutantData} cx="50%" cy="50%" outerRadius={80}>
                           <Tooltip />
-                          <RechartsPieChart data={pollutantData} cx="50%" cy="50%" outerRadius={80}>
-                            {pollutantData.map((entry, index) => (
-                              <Cell key={`cell-${index}`} fill={entry.color} />
-                            ))}
-                          </RechartsPieChart>
+                          {pollutantData.map((entry, index) => (
+                            <Cell key={`cell-${index}`} fill={entry.color} />
+                          ))}
                         </RechartsPieChart>
                       </ResponsiveContainer>
                     </div>

@@ -32,7 +32,7 @@ const POLLUTANT_DETAILS: Array<{
   {
     key: 'pm2_5',
     name: 'PM2.5',
-    icon: <Wind className="h-7 w-7 text-pink-500" />, // wind for fine particles
+    icon: <Wind className="h-7 w-7 text-pink-500" />,
     what: 'Tiny particles (less than 2.5 micrometers) that can get deep into your lungs.',
     harm: 'Can cause breathing problems, worsen asthma, and affect heart health.',
     protect: 'Wear a mask, use air purifiers, and avoid outdoor exercise when levels are high.',
@@ -41,7 +41,7 @@ const POLLUTANT_DETAILS: Array<{
   {
     key: 'pm10',
     name: 'PM10',
-    icon: <Wind className="h-7 w-7 text-yellow-500" />, // wind for coarse particles
+    icon: <Wind className="h-7 w-7 text-yellow-500" />,
     what: 'Slightly larger particles (less than 10 micrometers) that can be inhaled.',
     harm: 'Can irritate your nose, throat, and lungs.',
     protect: 'Keep windows closed, use air purifiers, avoid busy roads.',
@@ -50,7 +50,7 @@ const POLLUTANT_DETAILS: Array<{
   {
     key: 'o3',
     name: 'Ozone (O₃)',
-    icon: <Cloud className="h-7 w-7 text-blue-500" />, // cloud for ozone
+    icon: <Cloud className="h-7 w-7 text-blue-500" />,
     what: 'A gas found near the ground, not to be confused with the ozone layer.',
     harm: 'Can cause chest pain, coughing, and worsen lung diseases.',
     protect: 'Limit outdoor activities on high ozone days, especially in the afternoon.',
@@ -59,7 +59,7 @@ const POLLUTANT_DETAILS: Array<{
   {
     key: 'no2',
     name: 'Nitrogen Dioxide (NO₂)',
-    icon: <Droplets className="h-7 w-7 text-indigo-500" />, // droplets for gas
+    icon: <Droplets className="h-7 w-7 text-indigo-500" />,
     what: 'A reddish-brown gas with a sharp smell.',
     harm: 'Can irritate airways and lower resistance to respiratory infections.',
     protect: 'Stay indoors on high NO₂ days, ventilate your home.',
@@ -68,7 +68,7 @@ const POLLUTANT_DETAILS: Array<{
   {
     key: 'so2',
     name: 'Sulfur Dioxide (SO₂)',
-    icon: <Flame className="h-7 w-7 text-orange-500" />, // flame for burning
+    icon: <Flame className="h-7 w-7 text-orange-500" />,
     what: 'A colorless gas with a strong smell.',
     harm: 'Can cause throat and eye irritation, and worsen asthma.',
     protect: 'Avoid outdoor activities when levels are high.',
@@ -77,7 +77,7 @@ const POLLUTANT_DETAILS: Array<{
   {
     key: 'co',
     name: 'Carbon Monoxide (CO)',
-    icon: <Shield className="h-7 w-7 text-gray-500" />, // shield for protection
+    icon: <Shield className="h-7 w-7 text-gray-500" />,
     what: 'A colorless, odorless gas.',
     harm: 'Reduces oxygen in your blood, can be very dangerous in high amounts.',
     protect: 'Ensure good ventilation, avoid idling cars in garages.',
@@ -86,7 +86,7 @@ const POLLUTANT_DETAILS: Array<{
   {
     key: 'nh3',
     name: 'Ammonia (NH₃)',
-    icon: <Leaf className="h-7 w-7 text-green-500" />, // leaf for agriculture
+    icon: <Leaf className="h-7 w-7 text-green-500" />,
     what: 'A colorless gas with a strong smell.',
     harm: 'Can irritate eyes, nose, and throat.',
     protect: 'Avoid exposure, ventilate indoor spaces.',

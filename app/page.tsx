@@ -8,7 +8,7 @@ import AQICard from '@/components/aqi-card';
 import PollutantsBreakdown from '@/components/pollutants-breakdown';
 import ForecastChart from '@/components/forecast-chart';
 import LoadingSpinner from '@/components/loading-spinner';
-import AirQualityMap from '@/components/air-quality-map';
+import dynamic from 'next/dynamic';
 import HealthRecommendations from '@/components/health-recommendations';
 import AirQualityAlerts from '@/components/air-quality-alerts';
 import WeatherWidget from '@/components/weather-widget';
@@ -20,6 +20,8 @@ import { getAQIByCoords, getAQIForecast, getWeatherData, type AQIData, type Weat
 import { toast } from 'sonner';
 import FunFactCard from '@/components/fun-fact-card';
 import AirQualityTipCard from '@/components/air-quality-tip-card';
+
+const AirQualityMap = dynamic(() => import('@/components/air-quality-map'), { ssr: false });
 
 export default function Home() {
   const [aqiData, setAqiData] = useState<AQIData | null>(null);
@@ -271,7 +273,11 @@ export default function Home() {
               Allow location access or search for a city to get started with comprehensive air quality monitoring.
             </p>
             <Button
-              onClick={() => window.location.reload()}
+              onClick={() => {
+                if (typeof window !== 'undefined') {
+                  window.location.reload();
+                }
+              }}
               className="bg-blue-600 hover:bg-blue-700 text-white"
             >
               Enable Location Access

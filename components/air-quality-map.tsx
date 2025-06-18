@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -16,6 +16,13 @@ const redIcon = new L.Icon({
 });
 
 const AirQualityMap: React.FC = () => {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
+
   return (
     <div className="w-full h-64 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
       <MapContainer center={DEFAULT_POSITION} zoom={10} style={{ height: '100%', width: '100%' }} scrollWheelZoom={false}>
