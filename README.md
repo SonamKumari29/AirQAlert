@@ -1,9 +1,10 @@
 # AirQAlert
 
-[Live Demo → air-q-alert.vercel.app](https://air-q-alert.vercel.app/)
+
 
 **AirQAlert** is a modern web app for real-time air quality monitoring. Instantly check pollution levels, get health recommendations, and explore trends for your location or any city worldwide.
-
+![image](https://github.com/user-attachments/assets/013607ed-1605-49d4-9372-1f8322c7afb7)
+[Live Demo → air-q-alert](https://air-q-alert.vercel.app/)
 ---
 
 ## 🌟 Features
