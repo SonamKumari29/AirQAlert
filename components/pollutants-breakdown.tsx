@@ -99,27 +99,58 @@ const PollutantDetails: React.FC = () => {
 
   return (
     <div className="mt-8">
-      <h3 className="text-lg font-bold mb-4 text-gray-800 dark:text-gray-200">Pollutant Details</h3>
-      <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-7 gap-x-4 gap-y-4">
-        {POLLUTANT_DETAILS.map((p) => (
-          <button
-            key={p.key}
-            className="flex flex-col items-center justify-center p-2 h-24 w-full sm:w-28 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-gray-700 shadow hover:shadow-lg hover:-translate-y-1 hover:scale-105 hover:border-blue-400 dark:hover:border-blue-400 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            onClick={() => setSelected(p)}
-            aria-label={p.name}
-            type="button"
-          >
-            <div className="flex flex-col items-center gap-1">
-              {p.icon}
-              <span className="mt-1 text-sm font-semibold text-gray-800 dark:text-gray-100 text-center leading-tight">{p.name}</span>
-            </div>
-          </button>
-        ))}
-      </div>
+      <Card className="backdrop-blur-lg bg-white/80 dark:bg-slate-800/80 border-0 shadow-xl mb-8 p-6 rounded-2xl">
+        <CardHeader>
+          <CardTitle className="text-lg font-bold text-gray-800 dark:text-gray-200">Pollutant Details</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-2 lg:gap-8 items-stretch justify-items-center">
+            {POLLUTANT_DETAILS.map((p) => {
+              let borderColor = '';
+              switch (p.key) {
+                case 'pm2_5': borderColor = 'border-2 border-pink-500'; break;
+                case 'pm10': borderColor = 'border-2 border-yellow-500'; break;
+                case 'o3': borderColor = 'border-2 border-blue-500'; break;
+                case 'no2': borderColor = 'border-2 border-indigo-500'; break;
+                case 'so2': borderColor = 'border-2 border-orange-500'; break;
+                case 'co': borderColor = 'border-2 border-gray-500'; break;
+                case 'nh3': borderColor = 'border-2 border-green-500'; break;
+                default: borderColor = 'border-2'; break;
+              }
+
+              // Split name into main and symbol
+              let mainName = p.name;
+              let symbol = '';
+              const match = p.name.match(/^(.*?)(\s*\((.*?)\))?$/);
+              if (match) {
+                mainName = match[1].trim();
+                symbol = match[3] ? `(${match[3]})` : '';
+              }
+
+              return (
+                <button
+                  key={p.key}
+                  className={`flex flex-col items-center justify-center h-24 w-full min-w-[120px] rounded-xl bg-white dark:bg-slate-800 ${borderColor} shadow hover:shadow-lg hover:-translate-y-1 hover:scale-105 hover:border-blue-400 dark:hover:border-blue-400 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400 hover:bg-blue-50 dark:hover:bg-slate-700`}
+                  onClick={() => setSelected(p)}
+                  aria-label={p.name}
+                  type="button"
+                >
+                  <div className="flex flex-col items-center justify-center w-full text-center">
+                    <span className="text-base font-semibold text-gray-800 dark:text-gray-100 leading-tight">{mainName}</span>
+                    {symbol && (
+                      <span className="text-xs font-normal text-gray-500 dark:text-gray-400 leading-tight">{symbol}</span>
+                    )}
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        </CardContent>
+      </Card>
       {/* Modal for details (each detail as a card) */}
       {selected && (
         <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 backdrop-blur-sm">
-          <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl p-6 max-w-2xl w-full relative flex flex-col items-center gap-6">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl p-4 max-w-md w-full relative flex flex-col items-center gap-4">
             <button
               className="absolute top-3 right-3 text-gray-400 hover:text-red-500 transition-colors"
               onClick={() => setSelected(null)}
@@ -129,20 +160,19 @@ const PollutantDetails: React.FC = () => {
               <X className="h-6 w-6" />
             </button>
             <div className="flex flex-col items-center min-w-[60px]">
-              {selected.icon}
-              <span className="font-bold text-lg text-gray-900 dark:text-gray-100 mt-1 text-center">{selected.name}</span>
+              <span className="font-bold text-base text-gray-900 dark:text-gray-100 mt-1 text-center">{selected.name}</span>
             </div>
-            <div className="flex flex-row flex-wrap gap-4 items-center w-full justify-center text-xs">
-              <div className="rounded-lg bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-700 shadow p-3 min-w-[120px] max-w-xs flex items-center gap-2">
+            <div className="flex flex-row flex-wrap gap-3 items-center w-full justify-center text-xs">
+              <div className="rounded-lg bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-700 shadow p-2 min-w-[100px] max-w-xs flex items-center gap-2">
                 <span className="font-bold text-blue-700 dark:text-blue-300">What?</span> <span className="text-gray-700 dark:text-gray-300">{selected.what}</span>
               </div>
-              <div className="rounded-lg bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-700 shadow p-3 min-w-[120px] max-w-xs flex items-center gap-2">
+              <div className="rounded-lg bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-700 shadow p-2 min-w-[100px] max-w-xs flex items-center gap-2">
                 <AlertTriangle className="h-4 w-4 text-red-500" /> <span className="font-bold text-red-700 dark:text-red-300">Harm?</span> <span className="text-red-700 dark:text-red-300">{selected.harm}</span>
               </div>
-              <div className="rounded-lg bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-700 shadow p-3 min-w-[120px] max-w-xs flex items-center gap-2">
+              <div className="rounded-lg bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-700 shadow p-2 min-w-[100px] max-w-xs flex items-center gap-2">
                 <Shield className="h-4 w-4 text-green-500" /> <span className="font-bold text-green-700 dark:text-green-300">Protect:</span> <span className="text-green-700 dark:text-green-300">{selected.protect}</span>
               </div>
-              <div className="rounded-lg bg-yellow-50 dark:bg-yellow-900/30 border border-yellow-200 dark:border-yellow-700 shadow p-3 min-w-[120px] max-w-xs flex items-center gap-2">
+              <div className="rounded-lg bg-yellow-50 dark:bg-yellow-900/30 border border-yellow-200 dark:border-yellow-700 shadow p-2 min-w-[100px] max-w-xs flex items-center gap-2">
                 <Leaf className="h-4 w-4 text-yellow-500" /> <span className="font-bold text-yellow-700 dark:text-yellow-300">Sources:</span> <span className="text-yellow-700 dark:text-yellow-300">{selected.sources}</span>
               </div>
             </div>

@@ -18,6 +18,8 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useGeolocation } from '@/hooks/use-geolocation';
 import { getAQIByCoords, getAQIForecast, getWeatherData, type AQIData, type WeatherData } from '@/lib/api';
 import { toast } from 'sonner';
+import FunFactCard from '@/components/fun-fact-card';
+import AirQualityTipCard from '@/components/air-quality-tip-card';
 
 export default function Home() {
   const [aqiData, setAqiData] = useState<AQIData | null>(null);
@@ -206,18 +208,13 @@ export default function Home() {
                   </Button>
                 </div>
 
-                {/* Pollutants and Forecast */}
-                <div className="grid md:grid-cols-2 gap-8">
+                {/* Pollutant Details + Fun Fact Card Row */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                   <PollutantsBreakdown components={aqiData.list[0].components} />
-                  {forecastData && (
-                    <ForecastChart 
-                      data={forecastData.list.map(item => ({
-                        dt: item.dt,
-                        aqi: item.main.aqi,
-                        components: item.components
-                      }))} 
-                    />
-                  )}
+                  <div className="flex flex-col gap-6">
+                    <FunFactCard />
+                    <AirQualityTipCard />
+                  </div>
                 </div>
 
                 {/* Air Quality Map */}
