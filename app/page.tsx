@@ -125,11 +125,21 @@ export default function Home() {
           transition={{ duration: 0.5 }}
           className="text-center mb-8"
         >
-          <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent mb-4">
+          <h1 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-blue-600 via-green-400 to-green-600 bg-clip-text text-transparent mb-4 animate-gradient-x">
             Real-time Air Quality
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-            Monitor air pollution levels in your area and make informed decisions about your health with comprehensive insights and recommendations.
+            {aqiData && aqiData.list[0].main.aqi === 1
+              ? "It's a great day for a walk! The air is fresh and clean."
+              : aqiData && aqiData.list[0].main.aqi === 2
+              ? "Air is pretty good today. Enjoy your time outside!"
+              : aqiData && aqiData.list[0].main.aqi === 3
+              ? "Air is okay, but sensitive people should be careful."
+              : aqiData && aqiData.list[0].main.aqi === 4
+              ? "Air quality is poor. Try to limit outdoor activities."
+              : aqiData && aqiData.list[0].main.aqi === 5
+              ? "Air is very polluted. Best to stay indoors today."
+              : "Monitor air pollution levels in your area and make informed decisions about your health with comprehensive insights and recommendations."}
           </p>
         </motion.div>
 
@@ -186,11 +196,17 @@ export default function Home() {
             </div>
 
             {/* Main Dashboard Grid */}
-            <div className="grid lg:grid-cols-3 gap-8">
+            <div className="grid lg:grid-cols-3 gap-8 md:grid-cols-1 sm:grid-cols-1">
               {/* Left Column - Primary Data */}
               <div className="lg:col-span-2 space-y-8">
                 {/* AQI Card */}
-                <div className="flex justify-center">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  whileHover={{ scale: 1.04 }}
+                  transition={{ duration: 0.3, type: 'spring', stiffness: 300 }}
+                  className="flex justify-center shadow-lg"
+                >
                   <AQICard
                     aqi={aqiData.list[0].main.aqi}
                     location={`${weatherData.name}, ${weatherData.sys.country}`}
@@ -198,14 +214,14 @@ export default function Home() {
                     temperature={weatherData.main.temp}
                     onShare={handleShare}
                   />
-                </div>
+                </motion.div>
 
                 {/* Action Buttons */}
                 <div className="flex justify-center space-x-4">
                   <Button
                     onClick={handleRefresh}
                     disabled={loading}
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-6"
+                    className="bg-blue-600 hover:bg-blue-700 text-white px-6 transition-transform duration-150 hover:scale-105 shadow-md"
                   >
                     <RefreshCw className={`h-4 w-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
                     Refresh Data
@@ -213,7 +229,7 @@ export default function Home() {
                   <Button
                     onClick={handleShare}
                     variant="outline"
-                    className="px-6"
+                    className="px-6 transition-transform duration-150 hover:scale-105 shadow-md"
                   >
                     <Share2 className="h-4 w-4 mr-2" />
                     Share

@@ -55,26 +55,6 @@ export default function AboutPage() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="mb-12"
         >
-          <Card className="backdrop-blur-lg bg-white/80 dark:bg-slate-800/80 border-0 shadow-xl">
-            <CardHeader>
-              <CardTitle className="text-2xl font-bold text-center text-gray-800 dark:text-gray-200">
-                Our Mission
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="text-center">
-              <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
-                We believe everyone should have easy access to clear, real-time air quality info. AirQAlert is here to help you make better choices for your health and your family, with simple and reliable data.
-              </p>
-            </CardContent>
-          </Card>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mb-12"
-        >
           <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-gray-200 mb-8">
             Why Use AirQAlert?
           </h2>
