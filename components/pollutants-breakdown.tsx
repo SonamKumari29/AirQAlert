@@ -4,6 +4,8 @@ import { motion } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { getPollutantInfo } from '@/lib/api';
+import React, { useState } from 'react';
+import { AlertTriangle, Shield, Wind, Droplets, Flame, Cloud, Leaf, X } from 'lucide-react';
 
 interface PollutantsBreakdownProps {
   components: {
@@ -17,6 +19,139 @@ interface PollutantsBreakdownProps {
     nh3: number;
   };
 }
+
+const POLLUTANT_DETAILS: Array<{
+  key: string;
+  name: string;
+  icon: React.ReactNode;
+  what: string;
+  harm: string;
+  protect: string;
+  sources: string;
+}> = [
+  {
+    key: 'pm2_5',
+    name: 'PM2.5',
+    icon: <Wind className="h-7 w-7 text-pink-500" />, // wind for fine particles
+    what: 'Tiny particles (less than 2.5 micrometers) that can get deep into your lungs.',
+    harm: 'Can cause breathing problems, worsen asthma, and affect heart health.',
+    protect: 'Wear a mask, use air purifiers, and avoid outdoor exercise when levels are high.',
+    sources: 'Vehicle exhaust, burning wood, industrial emissions, dust.'
+  },
+  {
+    key: 'pm10',
+    name: 'PM10',
+    icon: <Wind className="h-7 w-7 text-yellow-500" />, // wind for coarse particles
+    what: 'Slightly larger particles (less than 10 micrometers) that can be inhaled.',
+    harm: 'Can irritate your nose, throat, and lungs.',
+    protect: 'Keep windows closed, use air purifiers, avoid busy roads.',
+    sources: 'Construction sites, road dust, pollen, vehicle emissions.'
+  },
+  {
+    key: 'o3',
+    name: 'Ozone (O₃)',
+    icon: <Cloud className="h-7 w-7 text-blue-500" />, // cloud for ozone
+    what: 'A gas found near the ground, not to be confused with the ozone layer.',
+    harm: 'Can cause chest pain, coughing, and worsen lung diseases.',
+    protect: 'Limit outdoor activities on high ozone days, especially in the afternoon.',
+    sources: 'Car exhaust, industrial emissions, reacts in sunlight.'
+  },
+  {
+    key: 'no2',
+    name: 'Nitrogen Dioxide (NO₂)',
+    icon: <Droplets className="h-7 w-7 text-indigo-500" />, // droplets for gas
+    what: 'A reddish-brown gas with a sharp smell.',
+    harm: 'Can irritate airways and lower resistance to respiratory infections.',
+    protect: 'Stay indoors on high NO₂ days, ventilate your home.',
+    sources: 'Car engines, power plants, burning fossil fuels.'
+  },
+  {
+    key: 'so2',
+    name: 'Sulfur Dioxide (SO₂)',
+    icon: <Flame className="h-7 w-7 text-orange-500" />, // flame for burning
+    what: 'A colorless gas with a strong smell.',
+    harm: 'Can cause throat and eye irritation, and worsen asthma.',
+    protect: 'Avoid outdoor activities when levels are high.',
+    sources: 'Coal burning, power plants, industrial processes.'
+  },
+  {
+    key: 'co',
+    name: 'Carbon Monoxide (CO)',
+    icon: <Shield className="h-7 w-7 text-gray-500" />, // shield for protection
+    what: 'A colorless, odorless gas.',
+    harm: 'Reduces oxygen in your blood, can be very dangerous in high amounts.',
+    protect: 'Ensure good ventilation, avoid idling cars in garages.',
+    sources: 'Car exhaust, gas stoves, burning fuel.'
+  },
+  {
+    key: 'nh3',
+    name: 'Ammonia (NH₃)',
+    icon: <Leaf className="h-7 w-7 text-green-500" />, // leaf for agriculture
+    what: 'A colorless gas with a strong smell.',
+    harm: 'Can irritate eyes, nose, and throat.',
+    protect: 'Avoid exposure, ventilate indoor spaces.',
+    sources: 'Fertilizers, livestock waste, cleaning products.'
+  }
+];
+
+const PollutantDetails: React.FC = () => {
+  const [selected, setSelected] = useState<null | typeof POLLUTANT_DETAILS[0]>(null);
+
+  return (
+    <div className="mt-8">
+      <h3 className="text-lg font-bold mb-4 text-gray-800 dark:text-gray-200">Pollutant Details</h3>
+      <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-7 gap-x-4 gap-y-4">
+        {POLLUTANT_DETAILS.map((p) => (
+          <button
+            key={p.key}
+            className="flex flex-col items-center justify-center p-2 h-24 w-full sm:w-28 rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-gray-700 shadow hover:shadow-lg hover:-translate-y-1 hover:scale-105 hover:border-blue-400 dark:hover:border-blue-400 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            onClick={() => setSelected(p)}
+            aria-label={p.name}
+            type="button"
+          >
+            <div className="flex flex-col items-center gap-1">
+              {p.icon}
+              <span className="mt-1 text-sm font-semibold text-gray-800 dark:text-gray-100 text-center leading-tight">{p.name}</span>
+            </div>
+          </button>
+        ))}
+      </div>
+      {/* Modal for details (each detail as a card) */}
+      {selected && (
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 backdrop-blur-sm">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl p-6 max-w-2xl w-full relative flex flex-col items-center gap-6">
+            <button
+              className="absolute top-3 right-3 text-gray-400 hover:text-red-500 transition-colors"
+              onClick={() => setSelected(null)}
+              aria-label="Close"
+              type="button"
+            >
+              <X className="h-6 w-6" />
+            </button>
+            <div className="flex flex-col items-center min-w-[60px]">
+              {selected.icon}
+              <span className="font-bold text-lg text-gray-900 dark:text-gray-100 mt-1 text-center">{selected.name}</span>
+            </div>
+            <div className="flex flex-row flex-wrap gap-4 items-center w-full justify-center text-xs">
+              <div className="rounded-lg bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-700 shadow p-3 min-w-[120px] max-w-xs flex items-center gap-2">
+                <span className="font-bold text-blue-700 dark:text-blue-300">What?</span> <span className="text-gray-700 dark:text-gray-300">{selected.what}</span>
+              </div>
+              <div className="rounded-lg bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-700 shadow p-3 min-w-[120px] max-w-xs flex items-center gap-2">
+                <AlertTriangle className="h-4 w-4 text-red-500" /> <span className="font-bold text-red-700 dark:text-red-300">Harm?</span> <span className="text-red-700 dark:text-red-300">{selected.harm}</span>
+              </div>
+              <div className="rounded-lg bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-700 shadow p-3 min-w-[120px] max-w-xs flex items-center gap-2">
+                <Shield className="h-4 w-4 text-green-500" /> <span className="font-bold text-green-700 dark:text-green-300">Protect:</span> <span className="text-green-700 dark:text-green-300">{selected.protect}</span>
+              </div>
+              <div className="rounded-lg bg-yellow-50 dark:bg-yellow-900/30 border border-yellow-200 dark:border-yellow-700 shadow p-3 min-w-[120px] max-w-xs flex items-center gap-2">
+                <Leaf className="h-4 w-4 text-yellow-500" /> <span className="font-bold text-yellow-700 dark:text-yellow-300">Sources:</span> <span className="text-yellow-700 dark:text-yellow-300">{selected.sources}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
 
 export default function PollutantsBreakdown({ components }: PollutantsBreakdownProps) {
   const pollutants = [
@@ -84,6 +219,7 @@ export default function PollutantsBreakdown({ components }: PollutantsBreakdownP
           })}
         </CardContent>
       </Card>
+      <PollutantDetails />
     </motion.div>
   );
 }

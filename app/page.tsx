@@ -92,27 +92,6 @@ export default function Home() {
     }
   };
 
-  const handleShare = async () => {
-    if (!aqiData || !weatherData) return;
-    
-    const text = `Air Quality in ${weatherData.name}: AQI ${aqiData.list[0].main.aqi} - Check yours at AirQAlert!`;
-    
-    try {
-      if (navigator.share) {
-        await navigator.share({
-          title: 'AirQAlert - Air Quality Report',
-          text: text,
-          url: window.location.href,
-        });
-      } else {
-        await navigator.clipboard.writeText(text);
-        toast.success('Air quality info copied to clipboard!');
-      }
-    } catch (err) {
-      console.error('Error sharing:', err);
-    }
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
       <Navbar />
@@ -212,7 +191,6 @@ export default function Home() {
                     location={`${weatherData.name}, ${weatherData.sys.country}`}
                     timestamp={aqiData.list[0].dt}
                     temperature={weatherData.main.temp}
-                    onShare={handleShare}
                   />
                 </motion.div>
 
@@ -225,14 +203,6 @@ export default function Home() {
                   >
                     <RefreshCw className={`h-4 w-4 mr-2 ${loading ? 'animate-spin' : ''}`} />
                     Refresh Data
-                  </Button>
-                  <Button
-                    onClick={handleShare}
-                    variant="outline"
-                    className="px-6 transition-transform duration-150 hover:scale-105 shadow-md"
-                  >
-                    <Share2 className="h-4 w-4 mr-2" />
-                    Share
                   </Button>
                 </div>
 
