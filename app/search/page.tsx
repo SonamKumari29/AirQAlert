@@ -64,7 +64,6 @@ export default function SearchPage() {
       <Navbar />
       
       <main className="container mx-auto px-4 py-8">
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -80,7 +79,6 @@ export default function SearchPage() {
           </p>
         </motion.div>
 
-        {/* Search */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -90,14 +88,12 @@ export default function SearchPage() {
           <CitySearch onCitySelect={handleCitySelect} />
         </motion.div>
 
-        {/* Loading State */}
         {loading && (
           <div className="flex justify-center items-center py-12">
             <LoadingSpinner />
           </div>
         )}
 
-        {/* Results */}
         {aqiData && weatherData && !loading && (
           <motion.div
             initial={{ opacity: 0 }}
@@ -105,7 +101,6 @@ export default function SearchPage() {
             transition={{ duration: 0.5 }}
             className="space-y-8"
           >
-            {/* AQI Card */}
             <div className="flex justify-center">
               <AQICard
                 aqi={aqiData.list[0].main.aqi}
@@ -115,31 +110,13 @@ export default function SearchPage() {
                 onShare={handleShare}
               />
             </div>
-
-            {/* Pollutants Breakdown */}
             <div className="max-w-2xl mx-auto">
               <PollutantsBreakdown components={aqiData.list[0].components} />
             </div>
           </motion.div>
         )}
 
-        {/* No results state */}
-        {!aqiData && !loading && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-center py-12"
-          >
-            <div className="text-6xl mb-4">🔍</div>
-            <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-2">
-              Search for a city
-            </h2>
-            <p className="text-gray-600 dark:text-gray-400">
-              Enter a city name above to check its air quality index and detailed pollution data.
-            </p>
-          </motion.div>
-        )}
+        {!aqiData && !loading && (<></>)}
       </main>
     </div>
   );
